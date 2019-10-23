@@ -11,8 +11,6 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<webappdir>${project.build.directory}/webapp</webappdir>
-		<webapp.libdir>${webappdir}/WEB-INF/lib</webapp.libdir>
 		<j2cl.maven.plugin.version>0.1-SNAPSHOT</j2cl.maven.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -115,102 +113,31 @@
 			<groupId>org.gwtproject.regexp</groupId>
 			<artifactId>gwt-regexp</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.elemental2</groupId>
-					<artifactId>elemental2-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-user</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-dev</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.jsinterop</groupId>
-					<artifactId>base</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>org.gwtproject.safehtml</groupId>
 			<artifactId>gwt-safehtml</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.elemental2</groupId>
-					<artifactId>elemental2-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-user</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-dev</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.jsinterop</groupId>
-					<artifactId>base</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>org.gwtproject.resources</groupId>
 			<artifactId>gwt-resources-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.elemental2</groupId>
-					<artifactId>elemental2-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-user</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-dev</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.jsinterop</groupId>
-					<artifactId>base</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.xml.bind</groupId>
-					<artifactId>jaxb-api</artifactId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.gwtproject.core</groupId>
+			<artifactId>gwt-core</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.gwtproject.dom</groupId>
 			<artifactId>gwt-dom</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.elemental2</groupId>
-					<artifactId>elemental2-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-user</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-dev</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.jsinterop</groupId>
-					<artifactId>base</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -280,7 +207,7 @@
 			<plugin>
 				<groupId>com.vertispan.j2cl</groupId>
 				<artifactId>j2cl-maven-plugin</artifactId>
-				<version>0.8-SNAPSHOT</version>
+				<version>0.10-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<id>build-js</id>
@@ -293,11 +220,11 @@
 
 				<configuration>
 					<entrypoint>org.roger600.lienzo.client.LienzoExamples</entrypoint>
-					<webappDirectory>${webappdir}/</webappDirectory>
 					<externs>
 						<extern>${project.basedir}/src/main/externs/svg.js</extern>
 					</externs>
 					<compilationLevel>BUNDLE</compilationLevel>
+					<initialScriptFilename>app.js</initialScriptFilename>
 				</configuration>
 			</plugin>
 
@@ -318,135 +245,4 @@
             </plugin-->
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>devmode</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<defaultGoal>process-classes</defaultGoal>
-				<resources>
-					<resource>
-						<directory>src/main/webapp</directory>
-						<targetPath>target/webapp</targetPath>
-					</resource>
-				</resources>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>3.1.0</version>
-						<executions>
-							<execution>
-								<id>custom-resources</id>
-								<phase>process-resources</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>target</outputDirectory>
-									<resources>
-										<resource>
-											<targetPath>${basedir}/target/webapp</targetPath>
-											<directory>src/main/webapp</directory>
-											<filtering>true</filtering>
-										</resource>
-										<resource>
-											<targetPath>${basedir}/target/webapp/classes</targetPath>
-											<directory>src/main/resources</directory>
-											<filtering>false</filtering>
-										</resource>
-									</resources>
-									<encoding>UTF-8</encoding>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<outputDirectory>${webappdir}/classes</outputDirectory>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.eclipse.jetty</groupId>
-						<artifactId>jetty-maven-plugin</artifactId>
-						<version>9.4.14.v20181114</version>
-						<configuration>
-							<webApp>
-								<contextPath>/</contextPath>
-								<resourceBases>${webappdir}</resourceBases>
-								<descriptor>${webappdir}/WEB-INF/web.xml</descriptor>
-							</webApp>
-							<reload>automatic</reload>
-							<scanIntervalSeconds>1</scanIntervalSeconds>
-						</configuration>
-						<executions>
-							<execution>
-								<id>start-jetty</id>
-								<phase>compile</phase>
-								<goals>
-									<goal>start</goal>
-								</goals>
-								<configuration>
-									<scanIntervalSeconds>0</scanIntervalSeconds>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>build</id>
-			<build>
-				<defaultGoal>process-classes</defaultGoal>
-				<resources>
-					<resource>
-						<directory>src/main/webapp</directory>
-						<targetPath>target/webapp</targetPath>
-					</resource>
-				</resources>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<outputDirectory>${webappdir}/classes</outputDirectory>
-						</configuration>
-					</plugin>
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>2.6</version>
-						<executions>
-							<execution>
-								<id>copy-resources</id>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${webappdir}</directory>
-											<excludes>
-												<exclude>**/classes/**</exclude>
-											</excludes>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 </project>
