@@ -373,11 +373,11 @@ public class LienzoFixedPanel extends LienzoPanel<LienzoFixedPanel>
         return this;
     }
 
-    public static native void enableWindowMouseWheelScroll(boolean enabled)
-    /*-{
-        $wnd.mousewheel = function ()
-        {
-            return enabled;
-        }
-    }-*/;
+//    public static native void enableWindowMouseWheelScroll(boolean enabled)
+//    /*-{
+//        $wnd.mousewheel = function ()
+//        {
+//            return enabled;
+//        }
+//    }-*/;
 }
