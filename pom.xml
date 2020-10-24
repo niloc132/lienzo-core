@@ -4,16 +4,16 @@
 		xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kie</groupId>
-	<artifactId>lienzo-core</artifactId>
+	<artifactId>lienzo-parent</artifactId>
 	<version>7.38.0-SNAPSHOT</version>
-	<name>[KIE] Lienzo - Core Framework</name>
-	<description>[KIE] Lienzo - Core Framework</description>
-	<packaging>jar</packaging>
+	<name>[KIE] Lienzo - Parent</name>
+	<description>[KIE] Lienzo - Parent</description>
+	<packaging>pom</packaging>
 
 	<properties>
+		<webappdir>${project.build.directory}/webapp</webappdir>
+		<webapp.libdir>${webappdir}/WEB-INF/lib</webapp.libdir>
 		<vertispan.jsinterop.base.version>1.0.0-SNAPSHOT</vertispan.jsinterop.base.version>
-
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -25,6 +25,7 @@
 
 		<j2cl.version>0.8-SNAPSHOT</j2cl.version>
 		<j2cl.maven.version>0.16-SNAPSHOT</j2cl.maven.version>
+		<org.kie.lienzo.version>7.38.0-SNAPSHOT</org.kie.lienzo.version>
 	</properties>
 
 	<url>http://www.kiegroup.org</url>
@@ -33,6 +34,7 @@
 		<name>JBoss by Red Hat</name>
 		<url>http://www.jboss.org/</url>
 	</organization>
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -40,6 +42,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
 	<developers>
 		<developer>
 			<name>All developers are listed on the team website</name>
@@ -103,137 +106,6 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<dependencies>
-		<!-- GWT -->
-		<!--dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${com.google.gwt.version}</version>
-		</dependency-->
-		<dependency>
-			<groupId>org.gwtproject.dom</groupId>
-			<artifactId>gwt-dom</artifactId>
-			<version>HEAD-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.gwtproject.core</groupId>
-			<artifactId>gwt-core</artifactId>
-			<version>HEAD-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.gwtproject.regexp</groupId>
-			<artifactId>gwt-regexp</artifactId>
-			<version>HEAD-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.gwtproject.timer</groupId>
-			<artifactId>gwt-timer</artifactId>
-			<version>HEAD-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.gwtproject.safehtml</groupId>
-			<artifactId>gwt-safehtml</artifactId>
-			<version>HEAD-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.gwtproject.resources</groupId>
-			<artifactId>gwt-resources-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<!--exclusions>
-				<exclusion>
-					<groupId>com.google.elemental2</groupId>
-					<artifactId>elemental2-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.core</groupId>
-					<artifactId>gwt-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.dom</groupId>
-					<artifactId>gwt-dom</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.safehtml</groupId>
-					<artifactId>gwt-safehtml</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.regexp</groupId>
-					<artifactId>gwt-regexp</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.xml.bind</groupId>
-					<artifactId>jaxb-api</artifactId>
-				</exclusion>
-			</exclusions-->
-		</dependency>
-
-		<!--dependency>
-			<groupId>org.gwtproject.resources</groupId>
-			<artifactId>gwt-resources-processor</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.elemental2</groupId>
-					<artifactId>elemental2-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.dom</groupId>
-					<artifactId>gwt-dom</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.safehtml</groupId>
-					<artifactId>gwt-safehtml</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.gwtproject.regexp</groupId>
-					<artifactId>gwt-regexp</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.xml.bind</groupId>
-					<artifactId>jaxb-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency-->
-
-		<!-- JsInterop & Elemental2 -->
-		<dependency>
-			<groupId>com.vertispan.jsinterop</groupId>
-			<artifactId>base</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.jsinterop</groupId>
-			<artifactId>jsinterop-annotations</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.elemental2</groupId>
-			<artifactId>elemental2-core</artifactId>
-			<version>${com.google.elemental2.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.elemental2</groupId>
-			<artifactId>elemental2-dom</artifactId>
-			<version>${com.google.elemental2.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.elemental2</groupId>
-			<artifactId>elemental2-promise</artifactId>
-			<version>${com.google.elemental2.version}</version>
-		</dependency>
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<scm>
 		<connection>scm:git:https://github.com/kiegroup/lienzo-core.git</connection>
 		<developerConnection>scm:git:git@github.com:kiegroup/lienzo-core.git</developerConnection>
@@ -253,72 +125,18 @@
 		</snapshotRepository>
 	</distributionManagement>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/java</directory>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <modules>
+        <module>lienzo-core</module>
+        <module>lienzo-webapp</module>
+    </modules>
 
 	<profiles>
 		<profile>
-			<id>j2cl</id>
+		<id>dev</id>
 			<build>
-				<defaultGoal>j2cl:build</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>com.vertispan.j2cl</groupId>
-						<artifactId>j2cl-maven-plugin</artifactId>
-						<version>${j2cl.maven.version}</version>
-						<executions>
-							<execution>
-								<id>build-js</id>
-								<phase>process-classes</phase>
-								<goals>
-									<goal>build</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<defaultWebappDirectory>${project.build.directory}/gwt/launcherDir</defaultWebappDirectory>
-							<compilationLevel>BUNDLE_JAR</compilationLevel>
-						</configuration>
-					</plugin>
-				</plugins>
+				<defaultGoal>package</defaultGoal>
 			</build>
 		</profile>
-
-		<!--profile>
-			<id>run</id>
-			<build>
-				<defaultGoal>tomcat7:run</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.tomcat.maven</groupId>
-						<artifactId>tomcat7-maven-plugin</artifactId>
-						<version>2.2</version>
-						<configuration>
-							<contextFile>${basedir}/src/main/tomcatconf/context.xml</contextFile>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile-->
 	</profiles>
 
 </project>
