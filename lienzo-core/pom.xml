@@ -186,11 +186,12 @@
 		</dependency-->
 
 		<!-- JsInterop & Elemental2 -->
-		<dependency>
-			<groupId>com.vertispan.jsinterop</groupId>
-			<artifactId>base</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
+		<!-- this hasn't been needed in a long time, it happens automatically - doing it manually can risk conflicts -->
+<!--		<dependency>-->
+<!--			<groupId>com.vertispan.jsinterop</groupId>-->
+<!--			<artifactId>base</artifactId>-->
+<!--			<version>1.0.0-SNAPSHOT</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>com.google.jsinterop</groupId>
@@ -240,6 +241,28 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.vertispan.j2cl</groupId>
+				<artifactId>j2cl-maven-plugin</artifactId>
+				<!--
+				Define only a test goal here so we can run our tests in a browser to be sure they work.
+				This probably isn't actually required for this project based on the tests I see in it,
+				but would eventually be a good idea.
+				-->
+				<executions>
+					<execution>
+						<id>js-tests</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<compilationLevel>ADVANCED</compilationLevel>
+							<webdriver>htmlunit</webdriver>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

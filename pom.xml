@@ -136,28 +136,36 @@
 			<id>dev</id>
 			<build>
 				<defaultGoal>j2cl:watch</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>com.vertispan.j2cl</groupId>
-						<artifactId>j2cl-maven-plugin</artifactId>
-						<version>${j2cl.maven.version}</version>
-						<executions>
-							<execution>
-								<id>build-js</id>
-								<phase>process-classes</phase>
-								<goals>
-									<goal>build</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<defaultWebappDirectory>${project.basedir}/lienzo-webapp/target/gwt/launcherDir</defaultWebappDirectory>
-							<compilationLevel>BUNDLE_JAR</compilationLevel>
-						</configuration>
-					</plugin>
-				</plugins>
 			</build>
 		</profile>
 	</profiles>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Define the version just once -->
+				<plugin>
+					<groupId>com.vertispan.j2cl</groupId>
+					<artifactId>j2cl-maven-plugin</artifactId>
+					<version>${j2cl.maven.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!--
+			Define settings to use when running dev mode. these aren't inherited, so they won't affect other modules
+			when they run. Note that if an app specifies something, it automatically overrides anything here - use
+			profiles to swap between dev and prod configuration instead.
+			-->
+			<plugin>
+				<groupId>com.vertispan.j2cl</groupId>
+				<artifactId>j2cl-maven-plugin</artifactId>
+				<inherited>false</inherited>
+				<configuration>
+					<webappDirectory>${project.basedir}/lienzo-webapp/target/gwt/launcherDir</webappDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

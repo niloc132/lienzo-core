@@ -193,11 +193,11 @@
 		</dependency-->
 
 		<!-- JsInterop & Elemental2 -->
-		<dependency>
-			<groupId>com.vertispan.jsinterop</groupId>
-			<artifactId>base</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.vertispan.jsinterop</groupId>-->
+<!--			<artifactId>base</artifactId>-->
+<!--			<version>1.0.0-SNAPSHOT</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>com.google.jsinterop</groupId>
@@ -228,6 +228,29 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.vertispan.j2cl</groupId>
+				<artifactId>j2cl-maven-plugin</artifactId>
+				<executions>
+					<!--
+					in this project we define a j2cl:build, this has two purposes:
+					  o  when doing a prod build, we'll get optimized output
+					  o  when doing a dev build, j2cl:watch run from the parent will know this is an app, not a library
+					-->
+					<execution>
+						<id>build-js</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<profiles>
 		<profile>
