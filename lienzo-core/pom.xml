@@ -290,12 +290,12 @@
 <!--		</profile&ndash;&gt;-->
 <!--	</profiles>-->
 
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<build>
-				<defaultGoal>package</defaultGoal>
-			</build>
-		</profile>
-	</profiles>
+<!--	<profiles>-->
+<!--		<profile>-->
+<!--			<id>dev</id>-->
+<!--			<build>-->
+<!--				<defaultGoal>package</defaultGoal>-->
+<!--			</build>-->
+<!--		</profile>-->
+<!--	</profiles>-->
 </project>

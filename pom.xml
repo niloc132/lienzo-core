@@ -11,8 +11,9 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<webappdir>${project.build.directory}/webapp</webappdir>
+		<webappdir>${project.basedir}/lienzo-webapp/target/webapp</webappdir>
 		<webapp.libdir>${webappdir}/WEB-INF/lib</webapp.libdir>
+		<webappDirectory>${project.basedir}/lienzo-webapp/target/gwt/launcherDir</webappDirectory>
 		<vertispan.jsinterop.base.version>1.0.0-SNAPSHOT</vertispan.jsinterop.base.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -132,9 +133,29 @@
 
 	<profiles>
 		<profile>
-		<id>dev</id>
+			<id>dev</id>
 			<build>
-				<defaultGoal>package</defaultGoal>
+				<defaultGoal>j2cl:watch</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>com.vertispan.j2cl</groupId>
+						<artifactId>j2cl-maven-plugin</artifactId>
+						<version>${j2cl.maven.version}</version>
+						<executions>
+							<execution>
+								<id>build-js</id>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<defaultWebappDirectory>${project.basedir}/lienzo-webapp/target/gwt/launcherDir</defaultWebappDirectory>
+							<compilationLevel>BUNDLE_JAR</compilationLevel>
+						</configuration>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
